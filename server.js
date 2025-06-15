@@ -20,7 +20,8 @@ io.on("connection", (socket) => {
   console.log("🟢 Usuario conectado:", socket.id);
 
   socket.on("location", (data) => {
-    socket.broadcast.emit("location", data);
+    const userData = { ...data, id: socket.id };
+    socket.broadcast.emit("location", userData);
   });
 
   socket.on("disconnect", () => {
