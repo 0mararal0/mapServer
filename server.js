@@ -21,6 +21,7 @@ io.on("connection", (socket) => {
 
   socket.on("location", (data) => {
     const userData = { ...data, id: socket.id };
+    console.log("📡 Reenviando ubicación:", userData); // <-- Este log
     socket.broadcast.emit("location", userData);
   });
 
