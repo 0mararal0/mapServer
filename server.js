@@ -20,13 +20,15 @@ io.on("connection", (socket) => {
   console.log("🟢 Usuario conectado:", socket.id);
 
   socket.on("location", (data) => {
+    console.log("📍 Ubicación recibida:", data); // <-- Este log
+
     const userData = { ...data, id: socket.id };
     console.log("📡 Reenviando ubicación:", userData); // <-- Este log
     socket.broadcast.emit("location", userData);
   });
 
-  socket.on("disconnect", () => {
-    console.log("🔴 Usuario desconectado:", socket.id);
+  socket.on("disconnect", (reason) => {
+    console.log(`🔴 Usuario desconectado: ${socket.id} (Motivo: ${reason})`);
   });
 });
 
